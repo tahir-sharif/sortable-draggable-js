@@ -1,1 +1,1 @@
-# beautifull-sortable-js-package
+# beautiful-sortable-js-package
