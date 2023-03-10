@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>Document</title>
+    <script src="./src/prism/prism.js"></script>
+    <link rel="stylesheet" href="./src/prism/prism.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="row">
+          <a href="https://github.com/tahir150/beautiful-sortable-js"
+            >Beautiful-sortable-js</a
+          >
+          <a
+            href="https://github.com/tahir150/beautiful-sortable-js"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="#919191"
+            >
+              <path
+                d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm2.218 18.616c-.354.069-.468-.149-.468-.336v-1.921c0-.653-.229-1.079-.481-1.296 1.56-.173 3.198-.765 3.198-3.454 0-.765-.273-1.389-.721-1.879.072-.177.312-.889-.069-1.853 0 0-.587-.188-1.923.717-.561-.154-1.159-.231-1.754-.234-.595.003-1.193.08-1.753.235-1.337-.905-1.925-.717-1.925-.717-.379.964-.14 1.676-.067 1.852-.448.49-.722 1.114-.722 1.879 0 2.682 1.634 3.282 3.189 3.459-.2.175-.381.483-.444.936-.4.179-1.413.488-2.037-.582 0 0-.37-.672-1.073-.722 0 0-.683-.009-.048.426 0 0 .46.215.777 1.024 0 0 .405 1.25 2.353.826v1.303c0 .185-.113.402-.462.337-2.782-.925-4.788-3.549-4.788-6.641 0-3.867 3.135-7 7-7s7 3.133 7 7c0 3.091-2.003 5.715-4.782 6.641z"
+              />
+            </svg>
+          </a>
+        </div>
+        <div class="info">
+          Beautiful-sortable-js is a JavaScript library for reorderable
+          drag-and-drop lists.
+        </div>
+      </header>
+
+      <div class="intro">
+        <h3>What is SortableJS</h3>
+        In <a href="">Beautiful-sortable-js</a>, any item can be sortable using
+        new Sortable() method. new Sortable() takes two arguments, The first one
+        is item which have to be sorted and second one takes options object
+        where any customization can be applied.Below are the examples with every
+        option so let get started with Demo's examples !
+      </div>
+
+      <section id="sortable-example">
+        <div class="section-head">
+          <p>Example 1: Simple Sortable Box</p>
+        </div>
+        <div class="section-body">
+          <div class="example-info">
+            It is the simple list, All elements are targeted one by one in a
+            loop and became sortable. it takes single element for sorting unlike
+            other libraries which takes Sortable parent only.
+          </div>
+          <div class="sortable-container">
+            <div class="sort">Hello I am a Element 1</div>
+            <div class="sort">Hello I am a Element 2</div>
+            <div class="sort">Hello I am a Element 3</div>
+            <div class="sort">Hello I am a Element 4</div>
+            <div class="sort">Hello I am a Element 5</div>
+          </div>
+        </div>
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="sortable-container">
+    <div class="sort">Hello I am a Element 1</div>
+    <div class="sort">Hello I am a Element 2</div>
+    <div class="sort">Hello I am a Element 3</div>
+    <div class="sort">Hello I am a Element 4</div>
+    <div class="sort">Hello I am a Element 5</div>
+  </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+
+  .sortable-container {
+    width: 300px;
+    max-height: 600px;
+    border: solid #000000 1px;
+    border-radius: 7px;
+    margin: 18px 0;
+    background-color: rgb(23 23 23);
+    overflow: auto;
+    padding: 15px;
+  }
+
+  .sort {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    color: #747474;
+    font-size: 13px;
+    margin-top: 10px;
+    border-radius: 5px;
+    outline: solid #1f1f1f 1px;
+    background-color: rgb(26 26 26);
+  }
+                      </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".sort").forEach(function(item){
+    const sortable = new Sortable(item);
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-multiple">
+        <div class="section-head">
+          <p>Example 2: Sorting in multiple boxes</p>
+        </div>
+        <div class="example-info">
+          SortableJS supports sorting in multiple containers, The Demo example
+          uses <a href="#containers-option">containers</a> options
+        </div>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="container-wrapper">
+              <div class="wrapper-head">Todo</div>
+              <div class="sort-container">
+                <div class="sort">
+                  <span>Awake</span>
+                </div>
+                <div class="sort">
+                  <span>Eat</span>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">InPrgress</div>
+              <div class="sort-container">
+                <div class="sort">
+                  <span>Sleeping</span>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Done</div>
+              <div class="sort-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="containers-example">
+    <div class="container-wrapper">
+      <div class="wrapper-head">Todo</div>
+      <div class="sort-container">
+        <div class="sort">
+          <span>Awake</span>
+        </div>
+        <div class="sort">
+          <span>Eat</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-wrapper">
+      <div class="wrapper-head">InPrgress</div>
+      <div class="sort-container">
+        <div class="sort">
+          <span>Sleeping</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-wrapper">
+      <div class="wrapper-head">Done</div>
+      <div class="sort-container"></div>
+    </div>
+  </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+  
+  .containers-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .containers-example .container-wrapper {
+    border: solid 1px #3d3d3d;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .containers-example .container-wrapper .wrapper-head {
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .containers-example .container-wrapper .sort-container {
+    min-height: 180px;
+    border: none;
+  }
+                      </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".sort").forEach(function(item){
+    const sortable = new Sortable(item, {
+      containers: "sort-container", // comma seperated appendable boxes classes,
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-containers">
+        <div class="section-head">
+          <p>Example 3: Sortable containers</p>
+        </div>
+        <div class="example-info">
+          The containers can also be sortable and appendable at same time.It is
+          also targeted by new Sortable() method.
+        </div>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="container-wrapper">
+              <div class="wrapper-head">Should Do</div>
+              <div class="sort-container">
+                <div class="sort sort-container border">
+                  <span class="suggestion"
+                    >I am container and also sortable</span
+                  >
+                  <div class="sort">
+                    <span>Awake</span>
+                  </div>
+                  <div class="sort">
+                    <span>Eat</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Should not Do</div>
+              <div class="sort-container sort-appendable">
+                <div
+                  class="sort sort-container border sort-appendable sortable sortable-containment"
+                >
+                  <span class="suggestion"
+                    >I am container and also sortable</span
+                  >
+                  <div class="sort sortable">
+                    <span>Sleep</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="containers-example">
+    <div class="container-wrapper">
+      <div class="wrapper-head">Should Do</div>
+      <div class="sort-container">
+        <div class="sort sort-container border">
+          <span class="suggestion"
+            >I am container and also sortable</span
+          >
+          <div class="sort">
+            <span>Awake</span>
+          </div>
+          <div class="sort">
+            <span>Eat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-wrapper">
+      <div class="wrapper-head">Should not Do</div>
+      <div class="sort-container">
+        <div class="sort sort-container border">
+          <span class="suggestion"
+            >I am container and also sortable</span
+          >
+          <div class="sort">
+            <span>Sleep</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+  
+  .containers-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .containers-example .container-wrapper {
+    border: solid 1px #3d3d3d;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .containers-example .container-wrapper .wrapper-head {
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .containers-example .container-wrapper .sort-container {
+    min-height: 180px;
+    border: none;
+  }
+              </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".sort").forEach(function(item){
+    const sortable = new Sortable(item, {
+      containers: "sort-container", // comma seperated appendable boxes classes,
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-prevented-container">
+        <div class="section-head">
+          <p>Example 4: Prevented containers</p>
+        </div>
+        <div class="example-info">
+          The Specific item can decide for it have to be append or not.This uses
+          <a href="#prevented-container-option">Prevented Containers</a> option.
+        </div>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="container-wrapper">
+              <div class="wrapper-head">Home</div>
+              <div class="sort-container">
+                <div class="sort can-go">
+                  <span>I can go to School 😀</span>
+                </div>
+                <div class="sort">
+                  <span>I cannot go to School 😈</span>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">School</div>
+              <div class="school-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="containers-example">
+    <div class="container-wrapper">
+      <div class="wrapper-head">Should Do</div>
+      <div class="sort-container">
+        <div class="sort sort-container border">
+          <span class="suggestion"
+            >I am container and also sortable</span
+          >
+          <div class="sort">
+            <span>Awake</span>
+          </div>
+          <div class="sort">
+            <span>Eat</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-wrapper">
+      <div class="wrapper-head">Should not Do</div>
+      <div class="sort-container">
+        <div class="sort sort-container border">
+          <span class="suggestion"
+            >I am container and also sortable</span
+          >
+          <div class="sort">
+            <span>Sleep</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+  
+  .containers-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .containers-example .container-wrapper {
+    border: solid 1px #3d3d3d;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .containers-example .container-wrapper .wrapper-head {
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .containers-example .container-wrapper .sort-container {
+    min-height: 180px;
+    border: none;
+  }
+              </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".sort").forEach(function(item){
+    const sortable = new Sortable(item, {
+      containers: "sort-container,school-container", // comma seperated appendable boxes classes,
+      preventedContainers: !item.classList.contains("can-go")
+        ? "school-container"
+        : "",
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-fallback">
+        <div class="section-head">
+          <p>Example 5: Fallback Elements</p>
+        </div>
+        <div class="example-info">
+          Fallback Element takes HTML element which will drop instead of
+          sortable element.It will prevent from sorting and will drop a provided
+          html fallback Element if fallbackClone option is false which is
+          defaults to true then it will drop single Element means if you drop an
+          Element and start drop on another container, The previous one will
+          replace from it instead of dropping another one Check Options API
+          below for more information.This uses
+          <a href="#fallbackelement-option">fallBackElement</a> and
+          <a href="#fallbackClone-option">fallBackClone</a> option.
+        </div>
+        <p class="example-name">With Clone (default)</p>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="container-wrapper">
+              <div class="wrapper-head">Fallback</div>
+              <div class="sort-container">
+                <div class="fallback">
+                  <span>I will Drop Fallback</span>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Drop here Fallback</div>
+              <div class="sort-container"></div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Drop here Fallback</div>
+              <div class="sort-container"></div>
+            </div>
+          </div>
+        </div>
+        <p class="example-name">Without Clone</p>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="container-wrapper">
+              <div class="wrapper-head">Fallback</div>
+              <div class="sort-container">
+                <div class="fallback Without-clone">
+                  <span>I will Drop Fallback</span>
+                </div>
+              </div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Drop here Fallback</div>
+              <div class="sort-container"></div>
+            </div>
+            <div class="container-wrapper">
+              <div class="wrapper-head">Drop here Fallback</div>
+              <div class="sort-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+    <div class="containers-example">
+      <div class="container-wrapper">
+        <div class="wrapper-head">Fallback</div>
+        <div class="sort-container">
+          <div class="fallback">
+            <span>I will Drop Fallback</span>
+          </div>
+        </div>
+      </div>
+      <div class="container-wrapper">
+        <div class="wrapper-head">Drop here Fallback</div>
+        <div class="sort-container"></div>
+      </div>
+      <div class="container-wrapper">
+        <div class="wrapper-head">Drop here Fallback</div>
+        <div class="sort-container"></div>
+      </div>
+    </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+                
+  body {
+    background-color: #1f1f1f;
+  }
+  
+  .containers-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .containers-example .container-wrapper {
+    border: solid 1px #3d3d3d;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .containers-example .container-wrapper .wrapper-head {
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .fallback {
+    border: rebeccapurple 1px solid;
+  }
+
+  .fallback-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 12px;
+    color: white;
+    border: rebeccapurple solid 1px;
+    background: #2e003f;
+  }
+              </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".fallback").forEach(function(item){
+    const sortable = new Sortable(item, {
+      containers: "sort-container", // comma seperated appendable boxes classes,
+      fallBackElement: `<div class="fallback-element">
+                          <span>I am fallback</span>
+                        </div>`,
+    fallBackClone: !item.classList.contains("Without-clone"),
+
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-zoomed">
+        <div class="section-head">
+          <p>Example 6: Zoomed parent Elements</p>
+          <p>Apply zoom <input type="checkbox" /></p>
+        </div>
+        <div class="example-info">
+          In some cases, page has CSS zoom which works same as transform :
+          scale(); property, and dragging libraries get disturbed from zoom, to
+          prevent this disturbation,we proviided
+          <a href="#zoom-option">zoom</a> and
+          <a href="#zoomed-element-option">zoomedElement</a>
+          The contrast between both options are if you know the value of zoom of
+          your page or page zoom is static and will not change then you can go
+          for <a href="#zoom-option">zoom</a> option but if your page has
+          dynamic or changeable zoom then you will need to pass
+          <a href="#zoomed-element-option">zoomedElement</a>
+          option which is recommonded method because it will check it's css zoom
+          property on every sort start which ranges between 0-1.
+        </div>
+        <div class="section-body m-0">
+          <div class="containers-example">
+            <div class="sortable-container">
+              <span class="message">I will not work perfect after zoom</span>
+
+              <div class="sort">Hello I am a Element 1</div>
+              <div class="sort">Hello I am a Element 2</div>
+              <div class="sort">Hello I am a Element 3</div>
+              <div class="sort">Hello I am a Element 4</div>
+              <div class="sort">Hello I am a Element 5</div>
+            </div>
+            <div class="sortable-container">
+              <span class="message"> I will work perfect after zoom </span>
+              <div class="sort">Hello I am a Element 1</div>
+              <div class="sort">Hello I am a Element 2</div>
+              <div class="sort">Hello I am a Element 3</div>
+              <div class="sort">Hello I am a Element 4</div>
+              <div class="sort">Hello I am a Element 5</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="containers-example" style="zoom: 0.5;">
+    <div class="sortable-container">
+      <span class="message">I will not work perfect after zoom</span>
+
+      <div class="sort">Hello I am a Element 1</div>
+      <div class="sort">Hello I am a Element 2</div>
+      <div class="sort">Hello I am a Element 3</div>
+      <div class="sort">Hello I am a Element 4</div>
+      <div class="sort">Hello I am a Element 5</div>
+    </div>
+    <div class="sortable-container">
+      <span class="message"> I will work perfect after zoom </span>
+      <div class="sort">Hello I am a Element 1</div>
+      <div class="sort">Hello I am a Element 2</div>
+      <div class="sort">Hello I am a Element 3</div>
+      <div class="sort">Hello I am a Element 4</div>
+      <div class="sort">Hello I am a Element 5</div>
+    </div>
+  </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+  
+  .containers-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+
+  .containers-example .container-wrapper {
+    border: solid 1px #3d3d3d;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .containers-example .container-wrapper .wrapper-head {
+    background-color: #000000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  span.message {
+    display: inline-block;
+    font-size: 12px;
+    color: #088d9c;
+    padding-bottom: 10px;
+  }
+              </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  const containers = sections[4]?.querySelectorAll(".sortable-container");
+  containers[0].querySelectorAll(".sort").forEach(function(item, i) {
+    const sortable = new Sortable(item);
+  });
+  containers[1].querySelectorAll(".sort").forEach(function(item, i) {
+    const sortable = new Sortable(item, {
+      zoomedElement: item.closest(".containers-example"),
+      // or zoom option like zoom : 0.5
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sortable-disabled">
+        <div class="section-head">
+          <p>Example 7: Disabled method</p>
+        </div>
+        <div class="example-info">
+          Any item can be disable after sortable. new Sortable() method returns
+          another method for disable like item.disable(),To re-enable it can be
+          re-enable by passing false into disbale method parameter like
+          item.disable(false) and any class can applied through
+          <a href="#disabled-class-option">disabledClass</a> option.
+        </div>
+        <div class="section-body">
+          <div class="sortable-container">
+            <div class="sort">Hello I am a Element 1</div>
+            <div class="sort">Hello I am a Element 2</div>
+            <div class="sort">Hello I am a Element 3</div>
+            <div class="sort">Hello I am a Element 4</div>
+            <div class="sort">Hello I am a Element 5</div>
+          </div>
+        </div>
+
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+  <div class="sortable-container">
+    <div class="sort">Hello I am a Element 1</div>
+    <div class="sort">Hello I am a Element 2</div>
+    <div class="sort">Hello I am a Element 3</div>
+    <div class="sort">Hello I am a Element 4</div>
+    <div class="sort">Hello I am a Element 5</div>
+  </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+
+  .sortable-container {
+    width: 300px;
+    max-height: 600px;
+    border: solid #000000 1px;
+    border-radius: 7px;
+    margin: 18px 0;
+    background-color: rgb(23 23 23);
+    overflow: auto;
+    padding: 15px;
+  }
+
+  .sort {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    color: #747474;
+    font-size: 13px;
+    margin-top: 10px;
+    border-radius: 5px;
+    outline: solid #1f1f1f 1px;
+    background-color: rgb(26 26 26);
+  }
+
+  .disabled {
+    opacity: 0.3;
+  }
+                      </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  document.querySelectorAll(".sort").forEach(function(item) {
+    const sortable = new Sortable(item, {
+      disabledClass: "disabled",
+    });
+    if (i % 2 !== 0) { // for even
+      const oldHTML = item.innerHTML;
+      sortable.disable();
+      item.innerHTML = "Click me to Re-Enable";
+
+      function reEnable() {
+        sortable.disable(false);
+        item.removeEventListener("click", reEnable);
+        item.innerHTML = oldHTML;
+      };
+
+      item.addEventListener("click", reEnable);
+    }
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-handle">
+        <div class="section-head">
+          <p>Example 8: Handle method</p>
+        </div>
+        <div class="example-info">
+          The example uses
+          <a href="#handle-option">handle</a> option. defaults to false, if this
+          option recieves html string or DOM object it will be showed to handle
+          and if it recieve true, the default handle will render any css Class
+          for handle can be pass using
+          <a href="#handle-class-option">handleClass</a> option.
+        </div>
+        <p class="example-name">Default Handle</p>
+        <div class="section-body">
+          <div class="sortable-container">
+            <div class="sort">Hello I am a Element 1</div>
+            <div class="sort">Hello I am a Element 2</div>
+            <div class="sort">Hello I am a Element 3</div>
+            <div class="sort">Hello I am a Element 4</div>
+            <div class="sort">Hello I am a Element 5</div>
+          </div>
+        </div>
+        <p class="example-name">Custom Handles</p>
+        <div class="section-body">
+          <div class="sortable-container">
+            <div class="sort">Hello I am a Element 1</div>
+            <div class="sort">Hello I am a Element 2</div>
+            <div class="sort">Hello I am a Element 3</div>
+            <div class="sort">Hello I am a Element 4</div>
+            <div class="sort">Hello I am a Element 5</div>
+          </div>
+        </div>
+
+        <div class="example-info"></div>
+        <!-- Code started -->
+        <div class="code-preview-wrapper">
+          <div class="code-preview">
+            <div class="code-heading">HTML</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-markup">
+    <p>Default Handle</p>
+    <div class="sortable-container">
+      <div class="sort">Hello I am a Element 1</div>
+      <div class="sort">Hello I am a Element 2</div>
+      <div class="sort">Hello I am a Element 3</div>
+      <div class="sort">Hello I am a Element 4</div>
+      <div class="sort">Hello I am a Element 5</div>
+    </div>
+    <p>Custom Handles</p>
+    <div class="sortable-container">
+      <div class="sort">Hello I am a Element 1</div>
+      <div class="sort">Hello I am a Element 2</div>
+      <div class="sort">Hello I am a Element 3</div>
+      <div class="sort">Hello I am a Element 4</div>
+      <div class="sort">Hello I am a Element 5</div>
+    </div>
+            </code></pre>
+            </div>
+          </div>
+
+          <div class="code-preview">
+            <div class="code-heading">CSS</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-css">
+  body {
+    background-color: #1f1f1f;
+  }
+
+  .sortable-container {
+    width: 300px;
+    max-height: 600px;
+    border: solid #000000 1px;
+    border-radius: 7px;
+    margin: 18px 0;
+    background-color: rgb(23 23 23);
+    overflow: auto;
+    padding: 15px;
+  }
+
+  .sort {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    color: #747474;
+    font-size: 13px;
+    margin-top: 10px;
+    border-radius: 5px;
+    outline: solid #1f1f1f 1px;
+    background-color: rgb(26 26 26);
+  }
+                      </code></pre>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-heading">Javascript</div>
+            <div class="pre-code-wrapper">
+              <pre class="code"><code class="nohighlight bs-javascript">
+  const containers = document.querySelectorAll(".sortable-container");
+
+  containers[0].querySelectorAll(".sort").forEach((item, i) => {
+    const sortable = new Sortable(item, {
+      handle: true,
+    });
+  });
+  containers[1].querySelectorAll(".sort").forEach((item, i) => {
+    const sortable = new Sortable(item, {
+      handle:
+        i % 2 !== 0
+          ? "👀"
+          : `<img style="width:50px; filter:invert(1)" src="https://img.freepik.com/free-icon/move_318-183631.jpg?w=200" />`,
+    });
+  });
+              </code></pre>
+            </div>
+          </div>
+        </div>
+        <!-- Code end -->
+      </section>
+
+      <section id="sortable-option">
+        <div class="section-head">
+          <p>Options Used</p>
+        </div>
+        <div class="section-body m-0">
+          <table>
+            <thead>
+              <th>Options</th>
+              <th>Description</th>
+            </thead>
+            <tbody>
+              <tr id="containers-option">
+                <td>containers</td>
+                <td>
+                  It receives comma seperated classes like
+                  "my-container,another-container" for container.It makes the
+                  div appendable.While sorting the element any sortable can be
+                  append into container, to prevent sort to append,the
+                  preventedContainers option will required in sortable's option.
+                </td>
+              </tr>
+              <tr id="prevented-container-option">
+                <td>preventedContainers</td>
+                <td>
+                  It also recieves comma seperated classes for the container,
+                  every sortable element can decide,It have to be drop in
+                  container or not.
+                </td>
+              </tr>
+              <tr id="zoom-option">
+                <td>zoom</td>
+                <td>
+                  It receives number value of zoom, defaults to 1.CSS zoom
+                  property value ranges between 0-1 for small scale and greater
+                  then 1 for large scale.if your container has zoom then this
+                  option should use to prevent sorting issues.
+                </td>
+              </tr>
+              <tr id="zoomed-element-option">
+                <td>zoomedElement</td>
+                <td>
+                  It also receives number value of zoom, defaults to 1.It is a
+                  recommended method to utilize, if sorting parent has zoom,it
+                  will watch the element if zoom changes or not so there is no
+                  chance to disturb sorting.
+                </td>
+              </tr>
+              <tr id="fallbackelement-option">
+                <td>fallBackElement</td>
+                <td>
+                  It recieves html string element or DOM element,defaults to
+                  null.It will drop the fallback element instead of real sorting
+                  element.It works only for another container and sortable for
+                  same container.
+                </td>
+              </tr>
+              <tr id="fallbackClone-option">
+                <td>fallBackClone</td>
+                <td>
+                  it receives boolean true | false.defaults to true.By default
+                  it drops a clone of provided fallback element.if it's
+                  fallbackClone value is false,It will not drop a clone.It drop
+                  single element for every drop.
+                </td>
+              </tr>
+              <tr id="handle-option">
+                <td>handle</td>
+                <td>
+                  It recieves boolen Or html string or DOM element for
+                  handle.Defaults to false.By default it works on clicking on
+                  any area of sortable,but if it receives true, it will apply
+                  default handles so mouse will have to be click on handle for
+                  sorting purpose.If it receive any element, the element will
+                  work as handle
+                </td>
+              </tr>
+              <tr id="handle-class-option">
+                <td>handleClass</td>
+                <td>
+                  it recieves string class to apply on handle.any customization
+                  for handle can be handled from css through provided class.
+                </td>
+              </tr>
+              <tr id="onstart-option">
+                <td>onStart</td>
+                <td>
+                  It receives callback funtion.The function will invoked if user
+                  starts sorting any element.It gives itemdetails in parameter
+                  of callback.
+                </td>
+              </tr>
+              <tr id="onsort-option">
+                <td>onSort</td>
+                <td>
+                  It receives callback funtion.SortableJS call this function if
+                  item has been succesfully sorted.It gives itemdetails in
+                  parameter of callback.
+                </td>
+              </tr>
+              <tr id="ondrop-option">
+                <td>onDrop</td>
+                <td>
+                  It receives callback funtion.SortableJS call this function for
+                  every drop,even if item is sorted or not.Item details can be
+                  found in it's paramter
+                </td>
+              </tr>
+              <tr id="itemclass-option">
+                <td>itemClass</td>
+                <td>
+                  It receives string class,The class will apply for sortable
+                  element.
+                </td>
+              </tr>
+              <tr id="draggingclass-option">
+                <td>draggingClass</td>
+                <td>
+                  It also receives class.The class will apply if item starts
+                  moving for sorting.
+                </td>
+              </tr>
+              <tr id="disabled-option">
+                <td>.disbale()</td>
+                <td>
+                  this method is returned from new Sortable() method.any item
+                  can be disabled for sorting through this method
+                </td>
+              </tr>
+              <tr id="disabled-class-option">
+                <td>disabledClass</td>
+                <td>
+                  if item is disabled , the provided class will apply until the
+                  item is re-enable
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="./src/sortable.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

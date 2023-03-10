@@ -11,11 +11,6 @@
     "url": "git+https://github.com/tahir-sharif/beautiful-sortablejs.git"
   },
   "keywords": [
-    "sortable-draggable-js",
-    "drag-and-drop",
-    "draggable",
-    "droppable",
-    "sortable",
     "sortablejs"
   ],
   "author": "Tahir Sharif",
