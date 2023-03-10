@@ -1,0 +1,22 @@
+{
+  "name": "sortable-draggable-js",
+  "version": "1.0.0",
+  "description": "A Javascript Library to make reorderable list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tahir-sharif/beautiful-sortablejs.git"
+  },
+  "keywords": [
+    "sortablejs"
+  ],
+  "author": "Tahir Sharif",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tahir-sharif/beautiful-sortablejs/issues"
+  },
+  "homepage": "https://sortablejs.netlify.app/"
+}
