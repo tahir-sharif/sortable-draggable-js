@@ -1,6 +1,6 @@
 {
   "name": "sortable-draggable-js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A Javascript Library to make reorderable list",
   "main": "index.js",
   "scripts": {
