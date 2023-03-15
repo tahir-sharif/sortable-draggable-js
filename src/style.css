@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
 
 body {
   background-color: black;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -40,6 +40,11 @@ body {
   text-decoration: none;
   color: inherit;
 }
+
+.container header h1 {
+  font-size: 2rem;
+}
+
 .container header .row {
   display: flex;
   align-items: center;
