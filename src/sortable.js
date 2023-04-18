@@ -769,7 +769,25 @@ const getUtils = function (config = {}) {
   };
 };
 
-function Sortable(element, paramConfig = {}) {
+function Sortable(
+  element,
+  paramConfig = {
+    zoom: undefined,
+    fallBackElement: null,
+    fallBackClone: true,
+    zoomedElement: null,
+    onStart: () => {},
+    onSort: () => {},
+    onDrop: () => {},
+    itemClass: '',
+    draggingClass: '',
+    containers: '',
+    handleClass: '',
+    disabledClass: '',
+    preventedContainers: '',
+    handle: false
+  }
+) {
   // throwing error if element is not provided
   if (!element) {
     console.error('Element is not provided !');
