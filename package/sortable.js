@@ -2,41 +2,41 @@ const getUtils = function (config = {}) {
   // first checking if all configs are valid
   const throwError = (message) => {
     const error = new Error(message);
-    error.name = 'Sortable JS';
+    error.name = "Sortable JS";
     throw error;
   };
 
   // Checking if not an error
   if (false) {
-    throwError('error');
+    throwError("error");
   }
 
   return {
     cssClasses: {
-      grabbingClass: 'cursor-grabbing',
-      grab: 'cursor-grab',
-      noUserSelection: 'no-user-selection',
-      sortingItem: 'current-sorting',
-      clonedPreview: 'sorting-clone-preview',
-      cloneMoving: 'clone-moving',
-      cloned: 'cloned',
-      sortMoving: 'sort-moving',
-      sortable: 'sortable',
-      containment: 'sortable-containment',
-      appendableClasss: 'sort-appendable',
-      defaultHeight: 'default-height',
-      fallBackElement: 'fallback-element',
-      fallBackPreview: 'fallback-preview',
-      disabledClass: 'sortable-disabled',
-      fallBackClone: 'fallback-clone',
-      handle: 'sortable-handle'
+      grabbingClass: "cursor-grabbing",
+      grab: "cursor-grab",
+      noUserSelection: "no-user-selection",
+      sortingItem: "current-sorting",
+      clonedPreview: "sorting-clone-preview",
+      cloneMoving: "clone-moving",
+      cloned: "cloned",
+      sortMoving: "sort-moving",
+      sortable: "sortable",
+      containment: "sortable-containment",
+      appendableClasss: "sort-appendable",
+      defaultHeight: "default-height",
+      fallBackElement: "fallback-element",
+      fallBackPreview: "fallback-preview",
+      disabledClass: "sortable-disabled",
+      fallBackClone: "fallback-clone",
+      handle: "sortable-handle",
     },
     sortableFigures: {
       mouseX: 0,
       mouseY: 0,
       windowScroll: {
         x: 0,
-        y: 0
+        y: 0,
       },
       clonedPreview: null,
       sortableParent: null,
@@ -46,32 +46,32 @@ const getUtils = function (config = {}) {
       preventedContainerClasses: [],
       cloneDistance: {
         y: 0,
-        x: 0
+        x: 0,
       },
       initial: {
         scrollY: 0,
         scrollX: 0,
         elementPosition: {
           left: 0,
-          top: 0
-        }
+          top: 0,
+        },
       },
       itemDetails: {
         startedFrom: {},
-        endedOn: {}
-      }
+        endedOn: {},
+      },
     },
     zoomedValue: 1,
     interval: null,
     handle: null,
 
     injectCss() {
-      const existingStyleTag = document.querySelector('[data-sortable-css]');
+      const existingStyleTag = document.querySelector("[data-sortable-css]");
 
       if (!existingStyleTag) {
         const css = `.${this.cssClasses.containment} {scroll-behavior: smooth;}.${this.cssClasses.sortable} {touch-action:none;}.${this.cssClasses.grab}:not(.${this.cssClasses.disabledClass}) , .${this.cssClasses.grab}:not(.${this.cssClasses.disabledClass}):hover {    cursor: grab;}.${this.cssClasses.grab}.${this.cssClasses.grabbingClass}:hover {    cursor: grabbing;}.${this.cssClasses.noUserSelection} , .${this.cssClasses.noUserSelection} * {    user-select: none !important;}.${this.cssClasses.sortMoving} {    background: #00000094 !important;    opacity: 0.5; pointer-events: none;}.${this.cssClasses.sortMoving} *{    opacity: 0 !important;}.${this.cssClasses.cloneMoving} {    opacity: 0.7;}.${this.cssClasses.appendableClasss} {  min-height:180px;}.${this.cssClasses.defaultHeight} , .${this.cssClasses.containment} {  padding: 8px;} .${this.cssClasses.handle} {    padding: 8px;position: absolute;left: 0;top: 0; display: none;} .${this.cssClasses.sortable}:hover .${this.cssClasses.handle} {display: block}`;
 
-        const style = document.createElement('style');
+        const style = document.createElement("style");
         style.dataset.sortableCss = true;
 
         if (style.styleSheet) {
@@ -80,30 +80,32 @@ const getUtils = function (config = {}) {
           style.appendChild(document.createTextNode(css));
         }
 
-        document.getElementsByTagName('head')[0].appendChild(style);
+        document.getElementsByTagName("head")[0].appendChild(style);
       }
     },
 
     getClone(element) {
       const clonedItem = (itemToClone) => {
+        const parentZoom = this.zoomedValue || 1;
+
         const itemRect = itemToClone.getBoundingClientRect();
         const clonedItem = itemToClone.cloneNode(true);
         const { top, left } = this.getElementPosition(element);
 
-        clonedItem.style.position = 'fixed';
-        clonedItem.style.top = top + 'px';
-        clonedItem.style.left = left + 'px';
+        clonedItem.style.position = "fixed";
+        clonedItem.style.top = top + "px";
+        clonedItem.style.left = left + "px";
 
-        clonedItem.style.width = itemRect.width + 'px';
-        clonedItem.style.height = itemRect.height + 'px';
+        clonedItem.style.width = itemRect.width / parentZoom + "px";
+        clonedItem.style.height = itemRect.height / parentZoom + "px";
         clonedItem.style.margin = 0;
         clonedItem.style.zIndex = 1000;
-        clonedItem.style.boxSizing = 'border-box';
-        clonedItem.style.userSelect = 'none';
-        clonedItem.style.pointerEvents = 'none';
+        clonedItem.style.boxSizing = "border-box";
+        clonedItem.style.userSelect = "none";
+        clonedItem.style.pointerEvents = "none";
         clonedItem
-          .querySelectorAll('*')
-          .forEach((el) => (el.style.pointerEvents = 'none'));
+          .querySelectorAll("*")
+          .forEach((el) => (el.style.pointerEvents = "none"));
 
         this.updateClass(clonedItem, this.cssClasses.clonedPreview);
         this.updateClass(clonedItem, config.draggingClass);
@@ -120,8 +122,8 @@ const getUtils = function (config = {}) {
       if (config.handle) {
         let handle = null;
 
-        if (typeof config.handle === 'boolean') {
-          handle = document.createElement('div');
+        if (typeof config.handle === "boolean") {
+          handle = document.createElement("div");
           handle.innerHTML = `
             <svg width="18" height="18" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
               <polygon fill="#979797" points="130.412 323.98 78.529 272.098 240 272.098 240 433.568 188.118 381.687 165.49 404.313 256 494.823 346.51 404.313 323.882 381.687 272 433.568 272 272.098 432.667 272.098 380.784 323.98 403.412 346.607 493.921 256.098 403.412 165.588 380.784 188.215 432.667 240.098 272 240.098 272 79.432 323.882 131.313 346.51 108.687 256 18.177 165.49 108.687 188.118 131.313 240 79.432 240 240.098 78.529 240.098 130.412 188.215 107.784 165.588 17.274 256.098 107.785 346.608 130.412 323.98" class="ci-primary"/>
@@ -137,7 +139,7 @@ const getUtils = function (config = {}) {
           this.updateClass(handle, config.handleClass);
         }
 
-        handle.parentElement.style.position = 'relative';
+        handle.parentElement.style.position = "relative";
         handle.classList.add(this.cssClasses.handle);
         this.handle = handle;
         return handle;
@@ -156,7 +158,7 @@ const getUtils = function (config = {}) {
 
     throwError(e) {
       const error = new Error(e);
-      error.name = 'SortableJS';
+      error.name = "SortableJS";
       console.error(error);
     },
 
@@ -182,8 +184,13 @@ const getUtils = function (config = {}) {
     },
 
     getElementPosition(element, wrapper) {
+      const parentZoom = this.zoomedValue || 1;
+
       const elementRect = element.getBoundingClientRect();
       let { y: top, x: left } = elementRect;
+      top = top / parentZoom;
+      left = left / parentZoom;
+
       const outline = parseFloat(getComputedStyle(element).outlineWidth);
       if (wrapper) {
         const wrapperRect = wrapper.getBoundingClientRect();
@@ -211,8 +218,8 @@ const getUtils = function (config = {}) {
 
     getNode(html, cssClass) {
       if (html) {
-        if (typeof html === 'string') {
-          const div = document.createElement('div');
+        if (typeof html === "string") {
+          const div = document.createElement("div");
           div.innerHTML = html;
           const ele =
             div.childNodes[0].nodeType === 3 ? div : div.childNodes[0];
@@ -222,7 +229,7 @@ const getUtils = function (config = {}) {
           try {
             html.classList.add(cssClass);
           } catch (e) {
-            this.throwError('Provided Element is Not a valid HTML element');
+            this.throwError("Provided Element is Not a valid HTML element");
           }
           return html;
         }
@@ -233,7 +240,7 @@ const getUtils = function (config = {}) {
       this.updateClass(element, this.cssClasses.sortable);
       this.updateClass(element, config.itemClass);
       const scrollParent =
-        element.closest('.' + this.cssClasses.appendableClasss) ||
+        element.closest("." + this.cssClasses.appendableClasss) ||
         element.parentElement;
 
       if (scrollParent) {
@@ -242,9 +249,9 @@ const getUtils = function (config = {}) {
       }
 
       if (config.containers) {
-        if (typeof config.containers === 'string') {
-          config.containers.split(',').forEach((cls) => {
-            document.querySelectorAll('.' + cls).forEach((el) => {
+        if (typeof config.containers === "string") {
+          config.containers.split(",").forEach((cls) => {
+            document.querySelectorAll("." + cls).forEach((el) => {
               this.updateClass(el, this.cssClasses.appendableClasss);
               this.handleDefaultHeight(el);
             });
@@ -253,7 +260,7 @@ const getUtils = function (config = {}) {
       }
 
       if (config.preventedContainers) {
-        const containers = config.preventedContainers.split(',');
+        const containers = config.preventedContainers.split(",");
         containers.forEach((cls) =>
           this.sortableFigures.preventedContainerClasses.push(cls.trim())
         );
@@ -275,7 +282,7 @@ const getUtils = function (config = {}) {
       }
     },
 
-    updateClass(element, cssClass, action = 'add') {
+    updateClass(element, cssClass, action = "add") {
       if (cssClass) {
         element?.classList[action](cssClass);
       }
@@ -299,7 +306,7 @@ const getUtils = function (config = {}) {
         // getting initial body scroll
         this.sortableFigures.windowScroll = {
           x: window.scrollX,
-          y: window.scrollY
+          y: window.scrollY,
         };
       }
 
@@ -353,11 +360,15 @@ const getUtils = function (config = {}) {
         y = y + yDiff;
       }
 
-      let left = pageX / this.zoomedValue - mouseDiffX;
-      let top = pageY / this.zoomedValue - mouseDiffY;
+      clonedPreview.style.left =
+        parseFloat(clonedPreview.style.left) -
+        mouseDiffX / this.zoomedValue +
+        "px";
 
-      clonedPreview.style.left = left - x + 'px';
-      clonedPreview.style.top = top - y + 'px';
+      clonedPreview.style.top =
+        parseFloat(clonedPreview.style.top) -
+        mouseDiffY / this.zoomedValue +
+        "px";
 
       // ReAssigning new value to take a difference
       this.sortableFigures.mouseY = pageY;
@@ -403,7 +414,7 @@ const getUtils = function (config = {}) {
       // if target is not sorting element and it's closest then target closest
       if (!pointedElement?.classList.contains(this.cssClasses.sortable)) {
         const closestSortable = pointedElement?.closest(
-          '.' + this.cssClasses.sortable
+          "." + this.cssClasses.sortable
         );
 
         if (
@@ -429,7 +440,7 @@ const getUtils = function (config = {}) {
 
       const isSortableElement =
         !pointedElement?.classList.contains(cssClasses.sortingItem) &&
-        !pointedElement?.closest('.' + cssClasses.sortingItem) &&
+        !pointedElement?.closest("." + cssClasses.sortingItem) &&
         pointedElement?.classList.contains(cssClasses.sortable);
 
       /// <== GET FALLBACK ELEMENT CODE
@@ -514,7 +525,7 @@ const getUtils = function (config = {}) {
           }
           // else it can append or sort anywhere
         } else if (configContainment) {
-          const configClasses = config.containers.split(',');
+          const configClasses = config.containers.split(",");
           const containmentClasses = configContainment.classList;
 
           let canAppend = false;
@@ -552,7 +563,8 @@ const getUtils = function (config = {}) {
           if (!isPrevented) {
             const eleToSort = sortable || sortingElement;
             const elementRect = pointedElement.getBoundingClientRect();
-            const elementMiddleY = elementRect.y + elementRect.height / 2;
+            const elementMiddleY =
+              elementRect.y / this.zoomedValue + elementRect.height / 2;
             const isInnerConntainment = pointedElement.classList.contains(
               // preventing for inner containment, it will control itself below
               cssClasses.appendableClasss
@@ -606,7 +618,7 @@ const getUtils = function (config = {}) {
           if (isSortableElement) {
             if (touchingBoundaries) {
               const isNotEmpty = configContainment.querySelector(
-                '.' + cssClasses.sortable
+                "." + cssClasses.sortable
               );
               // if not empty then run thouching boundaries code
               if (isNotEmpty) {
@@ -645,16 +657,16 @@ const getUtils = function (config = {}) {
 
                       if (
                         !sortStartedFromParentOfParent.classList.contains(
-                          '.' + cssClasses.appendableClasss
+                          "." + cssClasses.appendableClasss
                         )
                       ) {
                         const closestSortable =
                           sortStartedFromParentOfParent.closest(
-                            '.' + cssClasses.sortable
+                            "." + cssClasses.sortable
                           );
 
                         const isHaveThisCLosestSortable = [
-                          ...appendableContainment.children
+                          ...appendableContainment.children,
                         ].some((el) => el === closestSortable);
 
                         if (isHaveThisCLosestSortable) {
@@ -696,7 +708,7 @@ const getUtils = function (config = {}) {
     },
 
     terminateMouseDown(element, clonedItem) {
-      const transitionDuration = '0.15s';
+      const transitionDuration = "0.15s";
       const transitionTimeout = parseFloat(transitionDuration) * 1000;
       if (element) {
         // Scrolling into view where user have started sort
@@ -704,7 +716,7 @@ const getUtils = function (config = {}) {
         this.sortableFigures.sortableParent.scrollTo({
           top: scrollY,
           left: scrollX,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
 
         clearInterval(this.interval);
@@ -730,12 +742,12 @@ const getUtils = function (config = {}) {
         }
 
         setTimeout(() => {
-          this.updateClass(element, this.cssClasses.grabbingClass, 'remove');
-          this.updateClass(element, this.cssClasses.sortingItem, 'remove');
+          this.updateClass(element, this.cssClasses.grabbingClass, "remove");
+          this.updateClass(element, this.cssClasses.sortingItem, "remove");
         }, transitionTimeout);
-      } else console.error('element not found !');
+      } else console.error("element not found !");
       if (clonedItem) {
-        this.updateClass(clonedItem, this.cssClasses.grabbingClass, 'remove');
+        this.updateClass(clonedItem, this.cssClasses.grabbingClass, "remove");
         clonedItem.style.transition = `${transitionDuration}`;
         const { top, left } = this.getElementPosition(
           element,
@@ -743,15 +755,15 @@ const getUtils = function (config = {}) {
         );
         const { width: eleWidth, height: eleHeight } =
           getComputedStyle(element);
-        clonedItem.style.top = top + 'px';
-        clonedItem.style.left = left + 'px';
+        clonedItem.style.top = top + "px";
+        clonedItem.style.left = left + "px";
         clonedItem.style.width = eleWidth;
         clonedItem.style.height = eleHeight;
         setTimeout(() => {
           clonedItem.remove();
-          this.updateClass(element, this.cssClasses.sortMoving, 'remove');
+          this.updateClass(element, this.cssClasses.sortMoving, "remove");
         }, transitionTimeout);
-      } else console.error('cloned not found !');
+      } else console.error("cloned not found !");
       if (config.containment) {
         config.containment.onscroll = null;
       }
@@ -763,20 +775,38 @@ const getUtils = function (config = {}) {
       this.updateClass(
         document.body,
         this.cssClasses.noUserSelection,
-        'remove'
+        "remove"
       );
-    }
+    },
   };
 };
 
-function Sortable(element, paramConfig = {}) {
+function Sortable(
+  element,
+  paramConfig = {
+    zoom: undefined,
+    fallBackElement: null,
+    fallBackClone: true,
+    zoomedElement: null,
+    onStart: () => {},
+    onSort: () => {},
+    onDrop: () => {},
+    itemClass: "",
+    draggingClass: "",
+    containers: "",
+    handleClass: "",
+    disabledClass: "",
+    preventedContainers: "",
+    handle: false,
+  }
+) {
   // throwing error if element is not provided
   if (!element) {
-    console.error('Element is not provided !');
+    console.error("Element is not provided !");
     return {};
-  } else if (element.closest('pre')) {
+  } else if (element.closest("pre")) {
     return {
-      disable() {}
+      disable() {},
     };
   }
 
@@ -789,17 +819,17 @@ function Sortable(element, paramConfig = {}) {
     onStart: () => {},
     onSort: () => {},
     onDrop: () => {},
-    itemClass: '',
-    draggingClass: '',
-    containers: '',
-    handleClass: '',
-    disabledClass: '',
-    preventedContainers: '',
-    handle: false
+    itemClass: "",
+    draggingClass: "",
+    containers: "",
+    handleClass: "",
+    disabledClass: "",
+    preventedContainers: "",
+    handle: false,
   };
   const config = {
     ...defaultConfig,
-    ...paramConfig
+    ...paramConfig,
   };
 
   //utils
@@ -827,16 +857,16 @@ function Sortable(element, paramConfig = {}) {
       // initial mousedown configurations
       utils.initMouseDown(e, element, clonedPreview);
       // then start moving it following mouse position
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('touchmove', onMove); // touch
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("touchmove", onMove); // touch
       // adding mouseup listener
-      document.addEventListener('mouseup', removeListeners);
-      document.addEventListener('touchend', removeListeners); // touch
+      document.addEventListener("mouseup", removeListeners);
+      document.addEventListener("touchend", removeListeners); // touch
     }
   };
 
   const onMove = (e) => {
-    const isTouched = e.type === 'touchmove';
+    const isTouched = e.type === "touchmove";
     e.stopPropagation();
     utils.updateClass(
       utils.sortableFigures.clonedPreview,
@@ -846,19 +876,19 @@ function Sortable(element, paramConfig = {}) {
     if (isTouched) {
       const targetTouch = e.targetTouches[0];
       utils.movePreview({
-        event: targetTouch
+        event: targetTouch,
       });
       utils.sortElement({
         event: targetTouch,
         sortingElement: element,
-        path: e.path
+        path: e.path,
       });
     } else {
       utils.movePreview({ event: e });
       utils.sortElement({
         event: e,
         sortingElement: element,
-        path: e.path
+        path: e.path,
       });
     }
     utils.updateElementsInitialPosition(element);
@@ -867,26 +897,26 @@ function Sortable(element, paramConfig = {}) {
   const removeListeners = (e) => {
     e.stopPropagation();
     utils.terminateMouseDown(element, utils.sortableFigures.clonedPreview);
-    document.removeEventListener('mousemove', onMove);
-    document.removeEventListener('touchmove', onMove);
-    document.removeEventListener('mouseup', removeListeners);
+    document.removeEventListener("mousemove", onMove);
+    document.removeEventListener("touchmove", onMove);
+    document.removeEventListener("mouseup", removeListeners);
   };
 
   // Attaching Main Listener
-  (utils.handle || element).addEventListener('pointerdown', onMouseDown); // touch , mouse
+  (utils.handle || element).addEventListener("pointerdown", onMouseDown); // touch , mouse
 
   // Methods
   this.disable = function (disable = true) {
     if (element) {
       if (disable) {
-        element.removeEventListener('pointerdown', onMouseDown);
+        element.removeEventListener("pointerdown", onMouseDown);
         element.classList.remove(utils.cssClasses.sortable);
         if (config.disabledClass) {
           element.classList.add(config.disabledClass);
         }
         element.classList.add(utils.cssClasses.disabledClass);
       } else {
-        element.addEventListener('pointerdown', onMouseDown);
+        element.addEventListener("pointerdown", onMouseDown);
         element.classList.add(utils.cssClasses.sortable);
         if (config.disabledClass) {
           element.classList.remove(config.disabledClass);
@@ -895,7 +925,7 @@ function Sortable(element, paramConfig = {}) {
       }
     } else {
       console.error(
-        'Unable to disable because the  element you are trying to disable is not sortable'
+        "Unable to disable because the  element you are trying to disable is not sortable"
       );
     }
   };
