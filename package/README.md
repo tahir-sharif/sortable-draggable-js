@@ -2,7 +2,7 @@
 
 Streamline your web development with Sortable-Draggable-JS – the ultimate JavaScript library for effortlessly sorting and dragging items on your web page. With its intuitive drag-and-drop functionality, you can easily create custom, reorderable lists that enhance user experience and streamline your workflow.
 
-Demo : https://tahir-sharif.github.io/sortable-draggable-js
+Demo : https://sortable-draggable-js.vercel.app
 
 ## Getting Started
 
