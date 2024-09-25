@@ -18,10 +18,10 @@ Import into your project:
 import Sortable from 'sortable-draggable-js';
 ```
 
-Or connect a CDN link (Coming soon)
+Or connect a CDN link
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/npm/sortable-draggable-js@1.1.3/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortable-draggable-js@1.1.4/index.min.js"></script>
 ```
 
 ## Usage
