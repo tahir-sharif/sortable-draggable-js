@@ -21,7 +21,7 @@ import Sortable from 'sortable-draggable-js';
 Or connect a CDN link (Coming soon)
 
 ```javascript
-<script src="https://github.com/tahir150/sortable-draggable-js/edit/master/README.md"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortable-draggable-js@1.1.2/index.min.js"></script>
 ```
 
 ## Usage
