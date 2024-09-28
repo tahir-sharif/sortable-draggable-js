@@ -15,13 +15,13 @@ $ npm install sortable-draggable-js --save
 Import into your project:
 
 ```javascript
-import Sortable from 'sortable-draggable-js';
+import Sortable from "sortable-draggable-js";
 ```
 
 Or connect a CDN link
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/npm/sortable-draggable-js@1.1.5/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortable-draggable-js@1.1.6/index.min.js"></script>
 ```
 
 ## Usage
@@ -44,8 +44,8 @@ Or connect a CDN link
 ```
 
 ```javascript
-const elements = document.querySelectorAll('.sort');
-divsToSort.forEach((item) => {
+const elements = document.querySelectorAll(".sort");
+elements.forEach((item) => {
   const sortable = new Sortable(item);
 });
 ```
@@ -56,12 +56,12 @@ Options object can be assign by giving second argument.
 
 ```javascript
 const sortable = new Sortable(item, {
-  itemClass: 'item-class', // class applies to every sortable element
-  draggingClass: 'dargging', // class will apply when dragging start
-  disabledClass: 'disabled', // class will apply if sorting is disable
+  itemClass: "item-class", // class applies to every sortable element
+  draggingClass: "dargging", // class will apply when dragging start
+  disabledClass: "disabled", // class will apply if sorting is disable
   zoom: 1, // it is viewport zoom value (if have css zoom property)
-  containers: 'sort-container', // comma seperated appendable boxes classes
-  fallBackElement: item.classList.contains('fallback') // it is not sortable, it just append this fallback html
+  containers: "sort-container", // comma seperated appendable boxes classes
+  fallBackElement: item.classList.contains("fallback") // it is not sortable, it just append this fallback html
     ? `<div class="fallback-element">
          <span>I am fallback</span>
          </div>`
@@ -78,7 +78,7 @@ const sortable = new Sortable(item, {
   onSort: (details) => {
     // if element has change or sorted it takes gurantee to trigger after sorting
     console.log(details);
-  }
+  },
 });
 ```
 
